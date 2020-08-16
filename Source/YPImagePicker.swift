@@ -57,9 +57,13 @@ open class YPImagePicker: UINavigationController {
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        picker = YPPickerVC()
+        super.init(coder: aDecoder)
+        modalPresentationStyle = .fullScreen // Force .fullScreen as iOS 13 now shows modals as cards by default.
+        picker.imagePickerDelegate = self
+        navigationBar.tintColor = .ypLabel
     }
-    
+
 override open func viewDidLoad() {
         super.viewDidLoad()
         picker.didClose = { [weak self] in
